@@ -1,0 +1,5 @@
+{
+    "_comment":"File src/utils/constants/LocalToken.json là file mẫu được đẩy lên git, khi chạy 'npm run local-token' Base sẽ copy file này vào thư mục src/api, File src/utils/api/LocalToken.json được git bỏ qua để cho dev có thể thay đổi token dưới local",
+    "token":"07a05e8c03ae961030c77a8bd58198d1195cda09"
+}
+
