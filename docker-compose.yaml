@@ -14,10 +14,9 @@ services:
       - "5000:5000"
 
   frontend:
-    build: /Frontend/.
+    build: ./Frontend/.
     container_name: FE-ocr
     ports:
       - "3000:3000"
     depends_on:
       - backend
-

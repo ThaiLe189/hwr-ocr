@@ -1,4 +1,4 @@
-FROM python:3.7-slim-buster
+FROM python:3.7-slim-buster as builder
 RUN python3 -m venv /opt/venv 
 ENV PATH="/opt/venv/bin:$PATH"
 RUN pip3 install --no-cache-dir --upgrade pip setuptools wheel
