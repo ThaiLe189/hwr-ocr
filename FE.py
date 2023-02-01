@@ -7,12 +7,12 @@ import requests
 
 import json
 
-st.set_page_config(layout="wide", page_title="Thái OCR")
+st.set_page_config(layout="wide", page_title="Handwriting OCR")
 
 st.write("## Nhận dạng chữ viết tay")
 
 st.sidebar.write("## Tải hình ảnh cần nhận dạng :gear:")
-API_ENDPOINT = "http://localhost:5000/cvt"
+API_ENDPOINT = "http://localhost:5500/cvt"
 
 
 def call_api(imageBase64):

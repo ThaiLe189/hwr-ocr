@@ -1,15 +1,14 @@
-FROM python:3.7-slim-buster as builder
-RUN python3 -m venv /opt/venv 
-ENV PATH="/opt/venv/bin:$PATH"
-RUN pip3 install --no-cache-dir --upgrade pip setuptools wheel
-COPY requirements.txt .
+FROM python:3.7
+LABEL maintainer "ThaiLe"
 
-RUN pip3 install -r requirements.txt \
-    pip3 install pip-autoremove && \
-    pip3 uninstall pip-autoremove -y
+RUN apt-get update && apt-get install --no-install-recommends --no-install-suggests -y curl
+#RUN python3 -m venv /opt/venv 
+RUN apt-get -y install python3-pip
+
+RUN pip3 install --no-cache-dir --upgrade pip setuptools wheel
 
 RUN apt-get -y update\
-    && apt-get -y install git\ 
+    && apt-get -y install git\
     && apt-get install ffmpeg libsm6 libxext6  -y\
     && find /usr/local \
     \( -type d -a -name test -o -name tests \) \
@@ -21,10 +20,11 @@ RUN apt-get -y update\
     | sort -u \
     | xargs -r apk info --installed \
     | sort -u \
-    )" 
+    )"
 
-RUN mkdir /api
+RUN mkdir -p /api
 WORKDIR /api
-COPY --from=builder /opt/venv /opt/venv
-ENV PATH="/opt/venv/bin:$PATH"
-COPY . .
+COPY . /api
+RUN pip install -r requirements.txt
+
+CMD ["bash", "docker-entrypoint.sh"]
