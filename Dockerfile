@@ -4,7 +4,7 @@ ENV PATH="/opt/venv/bin:$PATH"
 RUN pip3 install --no-cache-dir --upgrade pip setuptools wheel
 COPY requirements.txt .
 
-RUN pip3 install -r requirements_api.txt \
+RUN pip3 install -r requirements.txt \
     pip3 install pip-autoremove && \
     pip3 uninstall pip-autoremove -y
 

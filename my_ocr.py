@@ -2,7 +2,7 @@ import tensorflow as tf
 import cv2
 
 
-def _sort_Rect(rect, cols):
+def _sort_rect(rect, cols):
     tolerance_factor = 10
     return ((rect["Y_min"] // tolerance_factor) * tolerance_factor) * cols + rect[
         "X_min"
@@ -31,31 +31,18 @@ def _predict_model(sess: object, img: object) -> object:
 
 
 def load_model_recog(init, meta, checkpoint):
-    g1 = tf.Graph()
-    with g1.as_default():
-        sess_init = tf.Session()
-        tf.train.import_meta_graph(init)
-        sess = sess_init
-        sess.run(tf.global_variables_initializer())
-        saver = tf.train.import_meta_graph(meta)
-        saver.restore(sess, tf.train.latest_checkpoint(checkpoint))
-        return sess
-
-def load_model_recog_cvt(init, meta, checkpoint):
-    g2 = tf.Graph()
-    with g2.as_default():
-        sess_cvt_init = tf.Session()
-        tf.train.import_meta_graph(init)
-        sess_cvt = sess_cvt_init
-        saver_cvt = tf.train.import_meta_graph(meta)
-        saver_cvt.restore(sess_cvt, tf.train.latest_checkpoint(checkpoint))
-        return sess_cvt
+    sess_init = tf.Session()
+    tf.train.import_meta_graph(init)
+    sess = sess_init
+    saver = tf.train.import_meta_graph(meta)
+    saver.restore(sess, tf.train.latest_checkpoint(checkpoint))
+    return sess
 
 
 def recognize_images(model, list_area, path_to_image):
     img = cv2.imread(path_to_image)
     text = ""
-    list_area.sort(key=lambda x: _sort_Rect(x, img.shape[1]))
+    list_area.sort(key=lambda x: _sort_rect(x, img.shape[1]))
     for area in list_area:
         img_crop = img[
                    int(area["Y_min"]): int(area["Y_max"]),

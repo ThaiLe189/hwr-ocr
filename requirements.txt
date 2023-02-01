@@ -27,9 +27,9 @@ psutil  # system utilization
 thop  # FLOPs computation
 
 # Web-API --------------------------------
+streamlit
 flask
 flask-cors
-gunicorn
 
 # ocr
 tensorflow==1.15.0

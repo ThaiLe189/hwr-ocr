@@ -1,11 +1,10 @@
-# HideIn4CV
+# ocr-handwriting
 
-
-## Upload image to GCR:
+## Run FE
 ```bash
-bash build.sh
+streamlit run FE.py
 ```
-## Run on server:
+## Run BE
 ```bash
-docker-compose up --build
+python app.py
 ```

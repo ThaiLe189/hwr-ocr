@@ -48,8 +48,5 @@ def predict_model(model: str, path_to_input: str):
         my_env.UPLOAD_FOLDER, ""
     )
     img, list_output = _call_yolo(model, path_to_input, path_save_output)
-    # image to base64
-    _, im_arr = cv2.imencode(".jpg", img)
-    im_bytes = im_arr.tobytes()
-    im_b64 = base64.b64encode(im_bytes)
-    return im_b64, list_output
+  
+    return path_save_output, list_output
